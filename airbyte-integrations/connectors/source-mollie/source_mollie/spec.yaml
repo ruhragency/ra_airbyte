@@ -4,9 +4,19 @@ connectionSpecification:
   title: Mollie Spec
   type: object
   required:
-    - TODO
+    - api_key
   properties:
-    # 'TODO: This schema defines the configuration required for the source. This usually involves metadata such as database and/or authentication information.':
-    TODO:
+    api_key:
       type: string
-      description: describe me
+      description: "API access key used to retrieve data from the Mollie REST-API."
+      airbyte_secret: true
+      order: 0
+    from:
+      type: string
+      description: "Used for pagination. Offset the result set to the payment with this ID. The payment with this ID is included in the result set as well."
+      order: 1
+    limit:
+      type: integer
+      default: 50
+      description: The number of payments to return (with a maximum of 250).
+      order: 2
