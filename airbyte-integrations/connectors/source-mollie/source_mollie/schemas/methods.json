@@ -1,418 +1,100 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "type": "object",
-    "properties": {
-      "_embedded": {
-        "type": "object",
-        "properties": {
-          "methods": {
-            "type": "array",
-            "items": [
-              {
-                "type": "object",
-                "properties": {
-                  "resource": {
-                    "type": "string"
-                  },
-                  "id": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "minimumAmount": {
-                    "type": "object",
-                    "properties": {
-                      "value": {
-                        "type": "string"
-                      },
-                      "currency": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "value",
-                      "currency"
-                    ]
-                  },
-                  "maximumAmount": {
-                    "type": "object",
-                    "properties": {
-                      "value": {
-                        "type": "string"
-                      },
-                      "currency": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "value",
-                      "currency"
-                    ]
-                  },
-                  "image": {
-                    "type": "object",
-                    "properties": {
-                      "size1x": {
-                        "type": "string"
-                      },
-                      "size2x": {
-                        "type": "string"
-                      },
-                      "svg": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "size1x",
-                      "size2x",
-                      "svg"
-                    ]
-                  },
-                  "status": {
-                    "type": "string"
-                  },
-                  "pricing": {
-                    "type": "array",
-                    "items": [
-                      {
-                        "type": "object",
-                        "properties": {
-                          "description": {
-                            "type": "string"
-                          },
-                          "fixed": {
-                            "type": "object",
-                            "properties": {
-                              "value": {
-                                "type": "string"
-                              },
-                              "currency": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "value",
-                              "currency"
-                            ]
-                          },
-                          "variable": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "description",
-                          "fixed",
-                          "variable"
-                        ]
-                      }
-                    ]
-                  },
-                  "_links": {
-                    "type": "object",
-                    "properties": {
-                      "self": {
-                        "type": "object",
-                        "properties": {
-                          "href": {
-                            "type": "string"
-                          },
-                          "type": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "href",
-                          "type"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "self"
-                    ]
-                  }
-                },
-                "required": [
-                  "resource",
-                  "id",
-                  "description",
-                  "minimumAmount",
-                  "maximumAmount",
-                  "image",
-                  "status",
-                  "pricing",
-                  "_links"
-                ]
-              },
-              {
-                "type": "object",
-                "properties": {
-                  "resource": {
-                    "type": "string"
-                  },
-                  "id": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "minimumAmount": {
-                    "type": "object",
-                    "properties": {
-                      "value": {
-                        "type": "string"
-                      },
-                      "currency": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "value",
-                      "currency"
-                    ]
-                  },
-                  "maximumAmount": {
-                    "type": "object",
-                    "properties": {
-                      "value": {
-                        "type": "string"
-                      },
-                      "currency": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "value",
-                      "currency"
-                    ]
-                  },
-                  "image": {
-                    "type": "object",
-                    "properties": {
-                      "size1x": {
-                        "type": "string"
-                      },
-                      "size2x": {
-                        "type": "string"
-                      },
-                      "svg": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "size1x",
-                      "size2x",
-                      "svg"
-                    ]
-                  },
-                  "status": {
-                    "type": "string"
-                  },
-                  "pricing": {
-                    "type": "array",
-                    "items": [
-                      {
-                        "type": "object",
-                        "properties": {
-                          "description": {
-                            "type": "string"
-                          },
-                          "fixed": {
-                            "type": "object",
-                            "properties": {
-                              "value": {
-                                "type": "string"
-                              },
-                              "currency": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "value",
-                              "currency"
-                            ]
-                          },
-                          "variable": {
-                            "type": "string"
-                          },
-                          "feeRegion": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "description",
-                          "fixed",
-                          "variable",
-                          "feeRegion"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "properties": {
-                          "description": {
-                            "type": "string"
-                          },
-                          "fixed": {
-                            "type": "object",
-                            "properties": {
-                              "value": {
-                                "type": "string"
-                              },
-                              "currency": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "value",
-                              "currency"
-                            ]
-                          },
-                          "variable": {
-                            "type": "string"
-                          },
-                          "feeRegion": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "description",
-                          "fixed",
-                          "variable",
-                          "feeRegion"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "properties": {
-                          "description": {
-                            "type": "string"
-                          },
-                          "fixed": {
-                            "type": "object",
-                            "properties": {
-                              "value": {
-                                "type": "string"
-                              },
-                              "currency": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "value",
-                              "currency"
-                            ]
-                          },
-                          "variable": {
-                            "type": "string"
-                          },
-                          "feeRegion": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "description",
-                          "fixed",
-                          "variable",
-                          "feeRegion"
-                        ]
-                      }
-                    ]
-                  },
-                  "_links": {
-                    "type": "object",
-                    "properties": {
-                      "self": {
-                        "type": "object",
-                        "properties": {
-                          "href": {
-                            "type": "string"
-                          },
-                          "type": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "href",
-                          "type"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "self"
-                    ]
-                  }
-                },
-                "required": [
-                  "resource",
-                  "id",
-                  "description",
-                  "minimumAmount",
-                  "maximumAmount",
-                  "image",
-                  "status",
-                  "pricing",
-                  "_links"
-                ]
-              },
-              {
-                "type": "object"
-              },
-              {
-                "type": "object"
-              }
-            ]
-          }
-        },
-        "required": [
-          "methods"
-        ]
-      },
-      "_links": {
-        "type": "object",
-        "properties": {
-          "self": {
-            "type": "object",
-            "properties": {
-              "href": {
-                "type": "string"
-              },
-              "type": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "href",
-              "type"
-            ]
-          },
-          "documentation": {
-            "type": "object",
-            "properties": {
-              "href": {
-                "type": "string"
-              },
-              "type": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "href",
-              "type"
-            ]
-          }
-        },
-        "required": [
-          "self",
-          "documentation"
-        ]
-      },
-      "count": {
-        "type": "integer"
-      }
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "resource": {
+      "type": "string"
     },
-    "required": [
-      "_embedded",
-      "_links",
-      "count"
-    ]
-  }
+    "id": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "minimumAmount": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "currency"
+      ]
+    },
+    "maximumAmount": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "currency"
+      ]
+    },
+    "image": {
+      "type": "object",
+      "properties": {
+        "size1x": {
+          "type": "string"
+        },
+        "size2x": {
+          "type": "string"
+        },
+        "svg": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "size1x",
+        "size2x",
+        "svg"
+      ]
+    },
+    "status": {
+      "type": "string"
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "href",
+            "type"
+          ]
+        }
+      },
+      "required": [
+        "self"
+      ]
+    }
+  },
+  "required": [
+    "resource",
+    "id",
+    "description",
+    "minimumAmount",
+    "maximumAmount",
+    "image",
+    "status",
+    "_links"
+  ]
+}

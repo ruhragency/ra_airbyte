@@ -7,9 +7,9 @@ from abc import ABC
 from sqlite3 import paramstyle
 from typing import Any, Iterable, List, Mapping, MutableMapping, Optional, Tuple
 
+from urllib.parse import urlparse, parse_qs
 import requests
 from mollie.api.client import Client
-from urllib.parse import urlparse, parse_qs
 from airbyte_cdk.sources import AbstractSource
 from airbyte_cdk.sources.streams import Stream
 from airbyte_cdk.sources.streams.http import HttpStream
@@ -19,19 +19,6 @@ from airbyte_cdk.sources.streams.http.auth import TokenAuthenticator
 class MollieStream(HttpStream, ABC):
 
     url_base = "https://api.mollie.com/v2/"
-
-    #def __init__(self,**kwargs) -> None:
-    #    super().__init__(**kwargs)
-
-    #def request_params(
-    #    self, stream_state: Mapping[str, Any],
-    #    stream_slice: Mapping[str, any] = None,
-    #    next_page_token: Mapping[str, Any] = None
-    #) -> MutableMapping[str, Any]:
-    #    return {}
-
-    def parse_response(self, response: requests.Response, **kwargs) -> Iterable[Mapping]:   
-        return [response.json().get('_embedded', [])]
 
 class Methods(MollieStream):
 
@@ -47,6 +34,9 @@ class Methods(MollieStream):
         next_page_token: Mapping[str, Any] = None
     ) -> str:
         return "methods/all"
+
+        def parse_response(self, response: requests.Response, **kwargs) -> Iterable[Mapping]:   
+            return response.json().get('_embedded', []).get('methods', [])
 
 
 # Basic incremental stream
@@ -112,7 +102,7 @@ class Payments(MollieStream):
 
     def parse_response(self, response: requests.Response, **kwargs) -> Iterable[Mapping]:
         return [response.json().get('_embedded', [])]
-
+            
 # Source
 class SourceMollie(AbstractSource):
     def check_connection(self, logger, config) -> Tuple[bool, any]:
