@@ -1,0 +1,115 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "resource": {
+        "type": "string"
+      },
+      "id": {
+        "type": "string"
+      },
+      "amount": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "value",
+          "currency"
+        ]
+      },
+      "status": {
+        "type": "string"
+      },
+      "createdAt": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string"
+      },
+      "metadata": {
+        "type": "null"
+      },
+      "paymentId": {
+        "type": "string"
+      },
+      "settlementId": {
+        "type": "string"
+      },
+      "settlementAmount": {
+        "type": "object",
+        "properties": {  
+          "value": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "value",
+          "currency"
+        ]
+      },
+      "_links": {
+        "type": "object",
+        "properties": {
+          "self": {
+            "type": "object",
+            "properties": {
+              "href": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "settlement": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "href",
+              "type"
+            ]
+          },
+          "payment": {
+            "type": "object",
+            "properties": {
+              "href": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "href",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "self",
+          "payment"
+        ]
+      }
+    },
+    "required": [
+      "resource",
+      "id",
+      "amount",
+      "status",
+      "createdAt",
+      "description",
+      "metadata",
+      "paymentId",
+      "settlementId",
+      "settlementAmount",
+      "_links"
+    ]
+  }

@@ -101,8 +101,35 @@ class Payments(MollieStream):
             return None
 
     def parse_response(self, response: requests.Response, **kwargs) -> Iterable[Mapping]:
-        return [response.json().get('_embedded', [])]
-            
+        return response.json().get('_embedded', []).get('payments', [])
+
+class Refunds(MollieStream):
+    primary_key = "id"
+
+    def __init__(self, config: Mapping[str, Any], **kwargs) -> None:
+        super().__init__(**kwargs)
+
+    def path(
+        self, stream_state: Mapping[str, Any] = None,
+        stream_slice: Mapping[str, Any] = None, 
+        next_page_token: Mapping[str, Any] = None
+    ) -> str:
+        return "refunds"  
+
+    def request_params(
+        self, stream_state: Mapping[str, Any],
+        stream_slice: Mapping[str, any] = None,
+        next_page_token: Mapping[str, Any] = None
+    ) -> MutableMapping[str, Any]:
+
+        params = super().request_params(stream_state, stream_slice, next_page_token)
+        if next_page_token:
+            params.update(next_page_token)
+        return params
+
+    def parse_response(self, response: requests.Response, **kwargs) -> Iterable[Mapping]:
+        return response.json().get('_embedded', []).get('refunds', [])  
+
 # Source
 class SourceMollie(AbstractSource):
     def check_connection(self, logger, config) -> Tuple[bool, any]:
@@ -127,4 +154,5 @@ class SourceMollie(AbstractSource):
         """
         auth = TokenAuthenticator(token=config['api_key'])  
         return [Methods(config, authenticator=auth),
-                 Payments(config, authenticator=auth)]
+                 Payments(config, authenticator=auth),
+                 Refunds(config, authenticator=auth)]
