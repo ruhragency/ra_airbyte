@@ -19,6 +19,15 @@ from airbyte_cdk.sources.streams.http.auth import TokenAuthenticator
 class MollieStream(HttpStream, ABC):
 
     url_base = "https://api.mollie.com/v2/"
+    
+    def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
+        if response.json().get('_links').get('next'):
+            url = response.json().get('_links').get('next').get('href')
+            parsed_url = urlparse(url)
+            from_param = parse_qs(parsed_url.query)['from'][0]
+            return {"from": from_param}
+        else:
+            return None 
 
 class Methods(MollieStream):
 
@@ -26,8 +35,7 @@ class Methods(MollieStream):
 
     def __init__(self, config: Mapping[str, Any], **kwargs) -> None:
         super().__init__(**kwargs)
-        
-
+    
     def path(
         self, stream_state: Mapping[str, Any] = None,
         stream_slice: Mapping[str, Any] = None, 
@@ -35,8 +43,8 @@ class Methods(MollieStream):
     ) -> str:
         return "methods/all"
 
-        def parse_response(self, response: requests.Response, **kwargs) -> Iterable[Mapping]:   
-            return response.json().get('_embedded', []).get('methods', [])
+    def parse_response(self, response: requests.Response, **kwargs) -> Iterable[Mapping]:   
+        return response.json().get('_embedded', []).get('methods', [])
 
 
 # Basic incremental stream
@@ -90,15 +98,6 @@ class Payments(MollieStream):
         if next_page_token:
             params.update(next_page_token)
         return params
-
-    def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
-        if response.json().get('_links').get('next'):
-            url = response.json().get('_links').get('next').get('href')
-            parsed_url = urlparse(url)
-            from_param = parse_qs(parsed_url.query)['from'][0]
-            return {"from": from_param}
-        else:
-            return None
 
     def parse_response(self, response: requests.Response, **kwargs) -> Iterable[Mapping]:
         return response.json().get('_embedded', []).get('payments', [])
